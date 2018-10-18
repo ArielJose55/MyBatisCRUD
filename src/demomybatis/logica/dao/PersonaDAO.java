@@ -24,15 +24,10 @@ public class PersonaDAO {
     
     public boolean insertar(Persona persona){
        int id = -1;
-        SqlSession session = sqlSessionFactory.openSession();
- 
-        try {
+        try (SqlSession session = sqlSessionFactory.openSession()) {
             id = session.insert("Persona.insert", persona);
             session.commit();
-        } finally {
-            session.close();
-        }
-        
+        }  
         return id != -1;
     }
 }
